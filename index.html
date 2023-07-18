@@ -15,20 +15,20 @@
     </div>
     <div class="weather">
         <img src="images/rain.png" class="weather-icon">
-        <h1 class="temp">67°F</h1>
-        <h2 class="city">Pittsburgh</h2>
+        <h1 class="temp"></h1>
+        <h2 class="city"></h2>
         <div class="details">
             <div class="col">
                 <img src="images/humidity.png">
                 <div>
-                    <p class="humidity">88%</p>
+                    <p class="humidity"></p>
                     <p>Humidity</p>
                 </div>
             </div>
             <div class="col">
                 <img src="images/wind.png">
                 <div>
-                    <p class="wind">2 mph</p>
+                    <p class="wind"></p>
                     <p>Wind</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
 <script>
 
     const apiKey = "55b81273031c13cf86758482ac9ca6d6";
-    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=pittsburgh&appid=55b81273031c13cf86758482ac9ca6d6";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=pittsburgh&appid=55b81273031c13cf86758482ac9ca6d6&units=imperial";
 
     async function checkWeather(){
         const response = await fetch(apiUrl + '&appid=${apiKey}');
@@ -49,9 +49,9 @@
         console.log(data);
 
         document.querySelector(".city").innerHTML = data.name;
-        document.querySelector(".temp").innerHTML = data.main.temp;
-        document.querySelector(".humidity").innerHTML = data.main.humidity;
-        document.querySelector(".wind").innerHTML = data.wind.speed;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " °F";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " mph";
     }
 
 
