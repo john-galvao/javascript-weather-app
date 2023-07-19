@@ -39,23 +39,31 @@
 
 <script>
 
-    const apiKey = "55b81273031c13cf86758482ac9ca6d6";
-    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=pittsburgh&appid=55b81273031c13cf86758482ac9ca6d6&units=imperial";
+const apiKey = "55b81273031c13cf86758482ac9ca6d6";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&appid=55b81273031c13cf86758482ac9ca6d6&units=imperial&q=";
 
-    async function checkWeather(){
-        const response = await fetch(apiUrl + '&appid=${apiKey}');
-        var data = await response.json();
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
 
-        console.log(data);
+async function checkWeather(city){
+    const response = await fetch(apiUrl + city + '&appid=${apiKey}');
+    var data = await response.json();
 
-        document.querySelector(".city").innerHTML = data.name;
-        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " °F";
-        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-        document.querySelector(".wind").innerHTML = data.wind.speed + " mph";
-    }
+    console.log(data);
+
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + " °F";
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML = data.wind.speed + " mph";
+
+}
 
 
-    checkWeather();
+searchBtn.addEventListener("click", ()=>{
+    checkWeather(searchBox.value);
+})
+
+
 </script>
 </body>
 </html>
